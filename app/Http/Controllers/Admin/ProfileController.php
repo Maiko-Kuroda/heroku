@@ -13,18 +13,24 @@ class ProfileController extends Controller
     {
         return view('admin.profile.create');
     }
-    public function create()
+    public function create(Request $request)
     {
+        // Varidationを行う
+      $this->validate($request, Profile::$rules);
+
+      $profile = new Profile;
+      $form = $request->all();
+      unset($form['_token']);
+      
+      // データベースに保存する
+      $profile->fill($form);
+      $profile->save();
+        
         return redirect('admin/profile/create');
+        
     }
-    public function edit()
-    {
-        return view('admin.profile.edit');
-    }
-    public function update()
-    {
-        return redirect('admin/profile/edit');
-    }
+
+
     public function edit(Request $request)
    {
       // Profile Modelからデータを取得する
@@ -44,12 +50,19 @@ class ProfileController extends Controller
       // 送信されてきたフォームデータを格納する
       $profile_form = $request->all();
       unset($profile_form['_token']);
-
       // 該当するデータを上書きして保存する
-      $news->fill($profile_form)->save();
+      $profile->fill($profile_form)->save();
 
       return redirect('admin/profile');
   }  
-  
+  // 以下を追記　　
+  public function delete(Request $request)
+  {
+      // 該当するProfile Modelを取得
+      $profile = Profile::find($request->id);
+      // 削除する
+      $profile->delete();
+      return redirect('admin/profile/');
+  }  
   
 }
