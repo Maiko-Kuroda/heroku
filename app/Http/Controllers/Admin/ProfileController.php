@@ -51,15 +51,8 @@ class ProfileController extends Controller
       $profile = Profile::find($request->id);
       // 送信されてきたフォームデータを格納する
       $profile_form = $request->all();
-      if (isset($profile_form['image'])) {
-        $path = $request->file('image')->store('public/image');
-        $profile->image_path = basename($path);
-        unset($profile_form['image']);
-      } elseif (isset($request->remove)) {
-        $profile->image_path = null;
-        unset($profile_form['remove']);
-      }
       unset($profile_form['_token']);
+      
       // 該当するデータを上書きして保存する
       $profile->fill($profile_form)->save();
       
@@ -80,7 +73,7 @@ class ProfileController extends Controller
           // 検索されたら検索結果を取得する
           $posts = Profile::where('title', $cond_title)->get();
       } else {
-          // それ以外はすべてのニュースを取得する
+          // それ以外はすべてのプロフィールを取得する
           $posts = Profile::all();
       }
       return view('admin.profile.index', ['posts' => $posts, 'cond_title' => $cond_title]);
