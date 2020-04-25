@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-8 mx-auto">
             <h2>プロフィール</h2>
-            <from action="{{action('Admin\ProfileController@update')}}" method="post" enctype="multipart/form-data">
+            <form action="{{action('Admin\ProfileController@update')}}" method="post" enctype="multipart/form-data">
                 @if (count($errors) > 0)
                         <ul>
                             @foreach($errors->all() as $e)
@@ -47,7 +47,7 @@
                    </div>
                </div>
                 
-            </from>
+            </form>
             {{-- 編集履歴を表示　--}}
             <div class="row mt-5">
                 <div class="col-md-4 mx-auto">
