@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-md-8 mx-auto">
             <h2>プロフィール</h2>
-            <from action="{{action('Admin\ProfileController@create')}}" method="post" enctype="multipart/form-data">
+            <form action="{{action('Admin\ProfileController@create')}}" method="post" enctype="multipart/form-data">
                 @if (count($errors) > 0)
                         <ul>
                             @foreach($errors->all() as $e)
@@ -45,7 +45,7 @@
                 
                 {{ csrf_field() }}
                 <input type="submit" class="btn btn-primary" value="更新">
-            </from>
+            </form>
         </div>
     </div>
 </div>

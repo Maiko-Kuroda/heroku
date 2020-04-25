@@ -5,7 +5,8 @@ use App\Http\Controllers\Controller;
 use App\News;
 use App\History;
 use Carbon\Carbon;
-use Storage;
+
+use Storage; //imageの保存をs3にする
 
 class NewsController extends Controller
 {

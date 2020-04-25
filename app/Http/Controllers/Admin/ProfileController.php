@@ -51,6 +51,12 @@ class ProfileController extends Controller
       // 送信されてきたフォームデータを格納する
       $profile_form = $request->all();
       unset($profile_form['_token']);
+      $profile->fill($profile_form)->save();
+      $profile_histories = new ProfileHistory;
+      $profile_histories->profile_id = $profile->id;
+      $profile_histories->edited_at = Carbon::now();
+      $profile_histories->save();
+      
       return redirect('admin/profile');
   }
     //
