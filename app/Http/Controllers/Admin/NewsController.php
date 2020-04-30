@@ -92,7 +92,7 @@ class NewsController extends Controller
         return redirect('admin/news/');
   }
 
- // 以下を追記　　
+ // 削除
   public function delete(Request $request)
   {
       // 該当するNews Modelを取得
